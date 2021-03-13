@@ -19,7 +19,6 @@ public class User {
 	@GeneratedValue
 	private Long Id;
 	@Column(unique = true)
-	private String dni;
 	private String name;
 	private String surname;
 	
@@ -37,8 +36,7 @@ public class User {
 	
 	private double money = 100;
 	
-	public User(String dni, String name, String surname, String email) {
-		this.dni = dni;
+	public User(String email, String name, String surname) {
 		this.name = name;
 		this.surname = surname;
 		this.email = email;
@@ -52,14 +50,6 @@ public class User {
 	
 	public void setId(Long id) {
 		Id = id;
-	}
-	
-	public String getDni() {
-		return dni;
-	}
-	
-	public void setDni(String dni) {
-		this.dni = dni;
 	}
 	
 	public String getName() {
@@ -128,7 +118,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [Id=" + Id + ", dni=" + dni + ", name=" + name + ", surname=" + surname + ", email=" + email
+		return "User [Id=" + Id + ", name=" + name + ", surname=" + surname + ", email=" + email
 				+ ", password=" + password + ", confirmPassword=" + confirmPassword + ", role=" + role + ", money="
 				+ money + "]";
 	}

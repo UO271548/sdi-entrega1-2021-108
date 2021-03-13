@@ -29,12 +29,18 @@
 						</a></li>
 					</ul></li>
 
-				<li><a href="/signup"> <span
-						class="glyphicon glyphicon-user" th:text="#{signup.message}" ></span> 
+				<li sec:authorize="!isAuthenticated()"><a href="/signup"> <span
+						class="glyphicon glyphicon-user" th:text="#{signup.message}"></span>
 				</a></li>
-				<li><a href="/login"> <span
-						class="glyphicon glyphicon-log-in" th:text="#{login.message}" ></span> 
+
+				<li sec:authorize="!isAuthenticated()"><a href="/login"> <span
+						class="glyphicon glyphicon-log-in" th:text="#{login.message}"></span>
 				</a></li>
+
+				<li sec:authorize="isAuthenticated()"><a href="/logout"> <span
+						class="glyphicon glyphicon-log-out" th:text="#{logout.message}"></span> 
+				</a></li>
+
 			</ul>
 		</div>
 	</div>
