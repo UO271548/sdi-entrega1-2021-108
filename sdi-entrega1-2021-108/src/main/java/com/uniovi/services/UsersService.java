@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.uniovi.entities.User;
 import com.uniovi.repositories.UsersRepository;
 
+
 @Service
 public class UsersService {
 
@@ -24,7 +25,13 @@ public class UsersService {
 		usersRepository.findAll().forEach(users::add);
 		return users;
 	}
-
+	
+	public List<User> getUsersNotAdmin(){
+		List<User> users = new ArrayList<User>();
+		usersRepository.findUserNotAdmin().forEach(users::add);
+		return users;
+	}
+	
 	public User getUser(Long id) {
 		return usersRepository.findById(id).get();
 	}
@@ -40,6 +47,13 @@ public class UsersService {
 
 	public void deleteUser(Long id) {
 		usersRepository.deleteById(id);
+	}
+	
+	public void deleteUserList(String[] uIds) {
+		for (String id : uIds) {
+			usersRepository.deleteById(Long.parseLong(id));
+	}
+		
 	}
 
 }

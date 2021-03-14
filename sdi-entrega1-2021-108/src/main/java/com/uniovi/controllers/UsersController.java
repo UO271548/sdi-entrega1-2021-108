@@ -1,5 +1,7 @@
 package com.uniovi.controllers;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.uniovi.entities.User;
 import com.uniovi.services.RolesService;
@@ -30,6 +33,20 @@ public class UsersController {
 	private RolesService rolesService;
 
 
+	@RequestMapping("/user/list")
+	public String getListado(Model model , @RequestParam(value="",required=false) String searchText) {
+		
+		model.addAttribute("usersList", usersService.getUsersNotAdmin());
+		return "user/list";
+	}
+	
+	@RequestMapping(value="/user/delete")
+	public String delete(@RequestParam("uid") String[] ids) {
+		System.out.println(Arrays.toString(ids));
+		usersService.deleteUserList(ids);
+		return "redirect:/user/list";
+	}
+	
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
 	public String signup(Model model) {
 		model.addAttribute("user", new User());

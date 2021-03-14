@@ -9,9 +9,15 @@
 			</button>
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
+
+			<ul class="nav navbar-nav" sec:authorize="isAuthenticated()">
+				<li><a href="/" th:text="#{home.message}"></a></li>
+				<li sec:authorize="hasRole('ROLE_ADMIN')"><a
+					href="/user/list" th:text="#{user.list.message}"></a></li>
+			</ul>
+
 			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown"><a id="btnLanguage" href="
- #"
+				<li class="dropdown"><a id="btnLanguage" href=" #"
 					class="dropdown-toggle" data-toggle="dropdown" role="button"
 					aria-haspopup="true" aria-expanded="false"> <span
 						th:text="#{language.change}"></span> <span class="caret"></span>
@@ -38,7 +44,7 @@
 				</a></li>
 
 				<li sec:authorize="isAuthenticated()"><a href="/logout"> <span
-						class="glyphicon glyphicon-log-out" th:text="#{logout.message}"></span> 
+						class="glyphicon glyphicon-log-out" th:text="#{logout.message}"></span>
 				</a></li>
 
 			</ul>
