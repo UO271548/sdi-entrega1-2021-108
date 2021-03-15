@@ -37,6 +37,7 @@ public class User {
 	private double money = 100;
 	
 	public User(String email, String name, String surname) {
+		super();
 		this.name = name;
 		this.surname = surname;
 		this.email = email;

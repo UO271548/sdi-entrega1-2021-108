@@ -1,7 +1,5 @@
 package com.uniovi.controllers;
 
-import java.util.Arrays;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,7 +40,6 @@ public class UsersController {
 	
 	@RequestMapping(value="/user/delete")
 	public String delete(@RequestParam("uid") String[] ids) {
-		System.out.println(Arrays.toString(ids));
 		usersService.deleteUserList(ids);
 		return "redirect:/user/list";
 	}

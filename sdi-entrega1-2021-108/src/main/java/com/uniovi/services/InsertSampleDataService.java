@@ -1,10 +1,14 @@
 package com.uniovi.services;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.uniovi.entities.Offer;
 import com.uniovi.entities.User;
 
 @Service
@@ -37,6 +41,10 @@ public class InsertSampleDataService {
 		user6.setRole(rolesService.getRoles()[1]);
 		
 		
+		
+		Set<Offer> offers1 = new HashSet<Offer>();
+		offers1.add(new Offer("tituloPrueba","descripcionPrueba", 100, user1));
+		user1.setOffers(offers1);
 		usersService.addUser(user1);
 		usersService.addUser(user2);
 		usersService.addUser(user3);

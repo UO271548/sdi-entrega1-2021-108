@@ -16,7 +16,7 @@ public class Offer {
 
 	@Id
 	@GeneratedValue
-	private String Id;
+	private Long Id;
 	
 	private String title;
 	private String description;
@@ -29,18 +29,20 @@ public class Offer {
 	
 	public Offer() {}
 	
-	public Offer(String title, String description, double price) {
+	public Offer(String title, String description, double price, User user) {
+		super();
 		this.title = title;
 		this.description = description;
 		this.date = Date.valueOf(LocalDate.now());
 		this.price = price;
+		this.user = user;
 	}
 	
 	
-	public String getId() {
+	public Long getId() {
 		return Id;
 	}
-	public void setId(String id) {
+	public void setId(Long id) {
 		Id = id;
 	}
 	public String getTitle() {
