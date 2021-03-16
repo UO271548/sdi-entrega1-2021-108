@@ -26,12 +26,12 @@ public class OffersService {
 	}
 	
 	
-	public Offer getUser(Long id) {
+	public Offer getOffer(Long id) {
 		return offersRepository.findById(id).get();
 	}
 
 
-	public void deletOffer(Long id) {
+	public void deleteOffer(Long id) {
 		offersRepository.deleteById(id);
 	}
 	

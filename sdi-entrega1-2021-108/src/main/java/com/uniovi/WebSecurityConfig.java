@@ -27,10 +27,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests()
 				.antMatchers("/css/**", "/img/**", "/script/**", "/", "/signup", "/login/**").permitAll()
-				.antMatchers("/user/list").hasAnyAuthority("ROLE_ADMIN").antMatchers("/user/delete")
-				.hasAnyAuthority("ROLE_ADMIN").antMatchers("/offer/add").hasAnyAuthority("ROLE_ESTANDAR")
-				.antMatchers("/offer/list").hasAnyAuthority("ROLE_ESTANDAR").anyRequest().authenticated().and()
-				.formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/home").and().logout().permitAll();
+				.antMatchers("/user/list").hasAnyAuthority("ROLE_ADMIN")
+				.antMatchers("/user/delete").hasAnyAuthority("ROLE_ADMIN")
+				.antMatchers("/offer/add").hasAnyAuthority("ROLE_ESTANDAR")
+				.antMatchers("/offer/list").hasAnyAuthority("ROLE_ESTANDAR")
+				.antMatchers("/offer/delete/**").hasAnyAuthority("ROLE_ESTANDAR")
+				.anyRequest().authenticated()
+				.and()
+				.formLogin().loginPage("/login")
+				.permitAll().defaultSuccessUrl("/home")
+				.and()
+				.logout().permitAll();
 	}
 
 	@Autowired

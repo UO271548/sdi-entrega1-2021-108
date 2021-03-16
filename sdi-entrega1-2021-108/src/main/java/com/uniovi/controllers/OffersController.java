@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -59,6 +60,21 @@ public class OffersController {
 		model.addAttribute("usersList", usersService.getUsers());
 		model.addAttribute("offer", new Offer());
 		return "/offer/add";
+	}
+	
+	@RequestMapping("/offer/delete/{id}")
+	public String deleteMark(@PathVariable Long id) {
+//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//		String email = auth.getName();
+//		User activeUser = usersService.getUserByEmail(email);
+//		
+//		if (activeUser.getOffers().contains(offersService.getOffer(id))) {
+//			offersService.deleteOffer(id);
+//		}
+		
+		offersService.deleteOffer(id);
+		return "redirect:/offer/list";
+
 	}
 
 }
