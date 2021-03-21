@@ -9,7 +9,7 @@
 		<p th:text="#{user.managment.message}"></p>
 		<div class="table-responsive">
 			<form class="navbar-form" action="/user/delete">
-				<button  type="submit" class="btn btn-default" 
+				<button  type="submit" class="btn btn-default" id="btndelete"
 					th:text="#{delete.button.message}"></button>
 				<table class="table table-hover">
 					<thead>
@@ -30,7 +30,7 @@
 							<td th:text="${user.email}"></td>
 							<td th:text="${user.name}"></td>
 							<td th:text="${user.surname}"></td>
-							<td align="center"><input type="checkbox" name="uid" 
+							<td align="center"><input id="checkbox" type="checkbox" name="uid" 
 								th:value="${user.id}" /></td>
 						</tr>
 					</tbody>

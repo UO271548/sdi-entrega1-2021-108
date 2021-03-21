@@ -1,6 +1,11 @@
 package com.uniovi.controllers;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -29,18 +34,23 @@ public class UsersController {
 	
 	@Autowired
 	private RolesService rolesService;
+	
+	@Autowired
+	private HttpSession httpSession;
 
 
 	@RequestMapping("/user/list")
-	public String getListado(Model model , @RequestParam(value="",required=false) String searchText) {
+	public String getListado(Model model) {
 		
 		model.addAttribute("usersList", usersService.getUsersNotAdmin());
 		return "user/list";
 	}
 	
 	@RequestMapping(value="/user/delete")
-	public String delete(@RequestParam("uid") String[] ids) {
-		usersService.deleteUserList(ids);
+	public String delete(@RequestParam(value="uid", required = false) String[] ids) {
+		if (ids !=null) {
+			usersService.deleteUserList(ids);
+		}
 		return "redirect:/user/list";
 	}
 	
@@ -63,12 +73,19 @@ public class UsersController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login(Model model) {
+	public String login( Model model) {
 		return "login";
 	}
 
 	@RequestMapping(value = { "/home" }, method = RequestMethod.GET)
 	public String home(Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String email = auth.getName();
+
+		User activeUser = usersService.getUserByEmail(email);
+		httpSession.setAttribute("uEmail", email);
+		httpSession.setAttribute("uMoney", activeUser.getMoney());
 		return "home";
 	}
+	
 }

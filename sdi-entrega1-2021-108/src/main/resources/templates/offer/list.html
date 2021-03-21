@@ -27,7 +27,7 @@
 					<tr th:each="offer : ${offersList}">
 						<td th:text="${offer.title}"></td>
 						<td th:text="${offer.description}"></td>
-						<td th:text="${offer.price}"></td>
+						<td th:text="${offer.price} + '€'"></td>
 						<td><a th:href="${'/offer/delete/' + offer.id}" th:text="#{offer.add.delete.message}"></a></td>
 					</tr>
 				</tbody>

@@ -27,6 +27,10 @@ public class Offer {
 	@JoinColumn(name = "user_id")
 	private User user;
 	
+	@ManyToOne
+	@JoinColumn(name = "user_buyer")
+	private User buyer;
+	
 	public Offer() {}
 	
 	public Offer(String title, String description, double price, User user) {
@@ -76,6 +80,15 @@ public class Offer {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	
+	public User getBuyer() {
+		return buyer;
+	}
+
+	public void setBuyer(User buyer) {
+		this.buyer = buyer;
 	}
 
 	@Override

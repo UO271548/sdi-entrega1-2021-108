@@ -32,6 +32,9 @@ public class User {
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private Set<Offer> offers;
 	
+	@OneToMany(mappedBy = "buyer", cascade = CascadeType.ALL)
+	private Set<Offer> purchases;
+	
 	private String role;
 	
 	private double money = 100;
@@ -115,6 +118,14 @@ public class User {
 
 	public void setOffers(Set<Offer> offers) {
 		this.offers = offers;
+	}
+	
+	public Set<Offer> getPurchases() {
+		return purchases;
+	}
+
+	public void setPurchases(Set<Offer> purchases) {
+		this.purchases = purchases;
 	}
 
 	@Override

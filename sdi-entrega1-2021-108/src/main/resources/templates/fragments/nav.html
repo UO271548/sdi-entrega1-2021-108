@@ -12,8 +12,9 @@
 
 			<ul class="nav navbar-nav" sec:authorize="isAuthenticated()">
 				<li><a href="/" th:text="#{home.message}"></a></li>
-				<li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/user/list"
-					th:text="#{user.list.message}"></a></li>
+				
+				<li sec:authorize="hasRole('ROLE_ADMIN')"><a id="adminUserList" href="/user/list"
+					th:text="#{user.list.message}" ></a></li>
 				
 				
 				<li id="offers-managment-menu" class="dropdown" sec:authorize="hasAnyAuthority('ROLE_ESTANDAR')">
@@ -24,11 +25,22 @@
 						<li><a href="/offer/list" th:text="#{offer.list.message}"></a></li>
 					</ul>
 				</li>
+				<li id="offers-purchases-menu" class="dropdown" sec:authorize="hasAnyAuthority('ROLE_ESTANDAR')">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#" th:text="#{offer.purchases.message}"> <span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="/offer/search" th:text="#{offer.search.message}"></a></li>
+						<li><a href="/offer/purchase" th:text="#{offer.purchases.list.message}"></a></li>
+					</ul>
+				</li>
 			</ul>
 			
 
 
 			<ul class="nav navbar-nav navbar-right">
+			
+				<li sec:authorize="isAuthenticated()"><a th:text="${session.uEmail}"></a></li>
+				<li sec:authorize="isAuthenticated()"><a th:text="${session.uMoney} + '€'"></a></li>
 				<li class="dropdown"><a id="btnLanguage" href=" #"
 					class="dropdown-toggle" data-toggle="dropdown" role="button"
 					aria-haspopup="true" aria-expanded="false"> <span
